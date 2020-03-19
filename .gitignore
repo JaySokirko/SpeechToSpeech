@@ -15,3 +15,4 @@
 .idea/
 hs_err_pid10368.log
 replay_pid10368.log
+app/src/main/res/raw/credentials.json
