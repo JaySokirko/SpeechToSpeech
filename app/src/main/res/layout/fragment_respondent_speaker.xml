@@ -15,31 +15,6 @@
         android:layout_height="match_parent"
         tools:context=".ui.NativeSpeakerFragment">
 
-        <ScrollView
-            android:id="@+id/cardView"
-            android:layout_width="match_parent"
-            android:layout_height="0dp"
-            android:layout_marginStart="16dp"
-            android:layout_marginLeft="16dp"
-            android:layout_marginTop="16dp"
-            android:layout_marginEnd="24dp"
-            android:layout_marginRight="24dp"
-            app:layout_constraintBottom_toTopOf="@+id/speech_btn"
-            app:layout_constraintEnd_toEndOf="parent"
-            app:layout_constraintStart_toStartOf="parent"
-            app:layout_constraintTop_toTopOf="parent">
-
-            <TextView
-                android:id="@+id/text"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginTop="16dp"
-                android:text="@{translation.translatedText}"
-                android:textColor="@color/white"
-                app:layout_constraintStart_toStartOf="@+id/cardView"
-                app:layout_constraintTop_toBottomOf="@+id/cardView" />
-        </ScrollView>
-
         <com.google.android.material.floatingactionbutton.FloatingActionButton
             android:id="@+id/speech_btn"
             android:layout_width="wrap_content"
@@ -47,8 +22,11 @@
             android:layout_marginEnd="24dp"
             android:layout_marginRight="24dp"
             android:layout_marginBottom="24dp"
+            android:clickable="true"
+            android:focusable="true"
+            android:src="@drawable/ic_mic_white"
             android:onClick="@{() -> translation.onSpeechButtonClick()}"
-            android:src="@drawable/ic_mic_normal"
+            app:backgroundTint="@color/deep_purple_500"
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintEnd_toEndOf="parent" />
 

@@ -1,33 +1,37 @@
 package com.speech.ui
 
-import android.content.Intent
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
+import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import androidx.databinding.DataBindingUtil
+import androidx.core.view.get
+import androidx.fragment.app.Fragment
+import androidx.lifecycle.Observer
 import com.speech.R
-import com.speech.databinding.ActivityMainBinding
-import com.speech.util.SPEECH_REQUEST
+import com.speech.viewModel.Event
 import com.speech.viewModel.Translation
 import kotlinx.android.synthetic.main.activity_main.*
-
 
 class MainActivity : AppCompatActivity() {
 
     private lateinit var backgroundAnimation: AnimationDrawable
-    private lateinit var translation: Translation
-
     private val TAG = "TAG"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        val binding: ActivityMainBinding =
-            DataBindingUtil.setContentView(this, R.layout.activity_main)
-
+        setContentView(R.layout.activity_main)
         setupAnimatedBackground()
+        setupFragmentPagerAdapter()
 
-        translation = Translation(context = this, activity = this)
-        binding.translation = translation
+//        val translation = Translation(applicationContext)
+//        translation.eventObserver.observe(this, Observer { event ->
+//            if (event == Event.SPEECH_RESPONDENT_FINISH){
+//                view_pager.setCurrentItem(0, true)
+//            }
+//            if (event == Event.SPEECH_NATIVE_FINISH){
+//                view_pager.setCurrentItem(1, true)
+//            }
+//        })
     }
 
     override fun onResume() {
@@ -40,12 +44,10 @@ class MainActivity : AppCompatActivity() {
         backgroundAnimation.stop()
     }
 
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        data ?: return
-        if(requestCode == SPEECH_REQUEST) {
-            translation.onActivityResult(requestCode, data)
-        }
+    private fun setupFragmentPagerAdapter() {
+        val fragmentList = listOf(NativeSpeakerFragment(), RespondentSpeakerFragment())
+        val adapter = FragmentPagerAdapter(supportFragmentManager, fragmentList)
+        view_pager.adapter = adapter
     }
 
     private fun setupAnimatedBackground() {
