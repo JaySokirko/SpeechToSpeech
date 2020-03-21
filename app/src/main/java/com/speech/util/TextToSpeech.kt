@@ -3,8 +3,9 @@ package com.speech.util
 import android.content.Context
 import android.speech.tts.TextToSpeech
 import java.util.*
+import javax.inject.Inject
 
-class TextToSpeech(context: Context) {
+class TextToSpeech @Inject constructor(context: Context) {
 
     private lateinit var androidTextToSpeech: TextToSpeech
 
@@ -18,11 +19,8 @@ class TextToSpeech(context: Context) {
         )
     }
 
-    fun setLocale(locale: Locale){
+    fun speak(locale: Locale, text: String){
         androidTextToSpeech.language = locale
-    }
-
-    fun speak(text: String){
         androidTextToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null)
     }
 

@@ -1,4 +1,4 @@
-package com.speech.ui
+package com.speech.ui.adapters
 
 import androidx.fragment.app.Fragment
 import androidx.fragment.app.FragmentManager

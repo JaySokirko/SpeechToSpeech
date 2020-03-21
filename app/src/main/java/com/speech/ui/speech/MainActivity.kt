@@ -1,37 +1,48 @@
-package com.speech.ui
+package com.speech.ui.speech
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle
-import android.os.Handler
 import androidx.appcompat.app.AppCompatActivity
-import androidx.core.view.get
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.speech.R
-import com.speech.viewModel.Event
-import com.speech.viewModel.Translation
+import com.speech.di.DaggerMainActivityComponent
+import com.speech.di.MainActivityModule
+import com.speech.ui.adapters.FragmentPagerAdapter
+import com.speech.util.EventObserver
+import com.speech.util.FOREIGN_SPEAKER_FRAGMENT
+import com.speech.util.NATIVE_SPEAKER_FRAGMENT
 import kotlinx.android.synthetic.main.activity_main.*
+import javax.inject.Inject
 
 class MainActivity : AppCompatActivity() {
 
+    @Inject
+    lateinit var fragmentList: List<@JvmSuppressWildcards Fragment>
     private lateinit var backgroundAnimation: AnimationDrawable
     private val TAG = "TAG"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
+
+        DaggerMainActivityComponent
+            .builder()
+            .mainActivityModule(MainActivityModule())
+            .build()
+            .inject(this)
+
         setupAnimatedBackground()
         setupFragmentPagerAdapter()
 
-//        val translation = Translation(applicationContext)
-//        translation.eventObserver.observe(this, Observer { event ->
-//            if (event == Event.SPEECH_RESPONDENT_FINISH){
-//                view_pager.setCurrentItem(0, true)
-//            }
-//            if (event == Event.SPEECH_NATIVE_FINISH){
-//                view_pager.setCurrentItem(1, true)
-//            }
-//        })
+        EventObserver.commonObserver.observe(this, Observer { event ->
+            if (event == EventObserver.Event.SPEECH_NATIVE_INTENT_FINISH) {
+                view_pager.setCurrentItem(FOREIGN_SPEAKER_FRAGMENT, true)
+            }
+            if (event == EventObserver.Event.SPEECH_FOREIGN_INTENT_FINISH) {
+                view_pager.setCurrentItem(NATIVE_SPEAKER_FRAGMENT, true)
+            }
+        })
     }
 
     override fun onResume() {
@@ -45,7 +56,6 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun setupFragmentPagerAdapter() {
-        val fragmentList = listOf(NativeSpeakerFragment(), RespondentSpeakerFragment())
         val adapter = FragmentPagerAdapter(supportFragmentManager, fragmentList)
         view_pager.adapter = adapter
     }

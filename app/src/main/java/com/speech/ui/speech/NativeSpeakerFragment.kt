@@ -1,6 +1,5 @@
-package com.speech.ui
+package com.speech.ui.speech
 
-import android.content.Intent
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -9,13 +8,11 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.speech.R
 import com.speech.databinding.FragmentNativeSpeakerBinding
+import com.speech.util.EventObserver
 import com.speech.util.REQUEST_SPEECH_NATIVE
-import com.speech.viewModel.Event
-import com.speech.viewModel.Translation
 
 class NativeSpeakerFragment : SpeakerParentFragment() {
 
-    override lateinit var translation: Translation
     private lateinit var binding: FragmentNativeSpeakerBinding
 
     override fun onCreateView(
@@ -27,28 +24,21 @@ class NativeSpeakerFragment : SpeakerParentFragment() {
             inflater,
             R.layout.fragment_native_speaker,
             container,
-            false)
+            false
+        )
         return binding.root
     }
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        translation = Translation(context = context!!)
         binding.translation = translation
+        binding.clickHandler = clickHandler
 
-        translation.eventObserver.observe(this, Observer { event ->
-            if (event == Event.START_SPEECH_INTENT) {
-                startActivityForResult(getSpeechIntent("ru",
-                        resources.getString(R.string.speech_intent_hint_ru)), REQUEST_SPEECH_NATIVE)
+        clickHandler.clicksObserver.observe(this, Observer { event ->
+            if (event == EventObserver.Event.START_SPEECH_INTENT) {
+                startActivityForResult(getSpeechIntent("ru", resources.getString(R.string.speech_intent_hint_ru)),
+                    REQUEST_SPEECH_NATIVE)
             }
         })
-    }
-
-    override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
-        super.onActivityResult(requestCode, resultCode, data)
-        data ?: return
-        if (requestCode == REQUEST_SPEECH_NATIVE) {
-            translation.onActivityResult(requestCode, data)
-        }
     }
 }
