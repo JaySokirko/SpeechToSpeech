@@ -1,4 +1,4 @@
-package com.speech.ui.speech
+package com.speech.ui.conversation
 
 import android.graphics.drawable.AnimationDrawable
 import android.os.Bundle

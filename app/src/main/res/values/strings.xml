@@ -4,33 +4,8 @@
     <string name="speech_intent_hint_ru">Говорите</string>
     <string name="ru">ru</string>
     <string name="en">en</string>
+    <string name="no_internet">No internet connection</string>
+    <string name="no_internet_hint">Please check your internet connection and try again.</string>
+    <string name="settings">settings</string>
 
-    <string name="text_for_testing">To place the floating action button, we will use CoordinatorLayout.
-        A CoordinatorLayout helps facilitate interactions between views contained within it,
-        which will be useful later to describe how to animate the button depending on scroll changes.
-        For now we can take advantage of a feature in CoordinatorLayout that allows us to hover
-        one element over another. We simply need to have the ListView and FloatingActionButton
-        contained within the CoordinatorLayout and use the layout_anchor and
-        layout_anchorGravity attributes.
-    Next, you must implement a CoordinatorLayout Behavior for the Floating Action Button.
-        This class will be used to define how the button should respond to other views contained
-        within the same CoordinatorLayout.
-Create a file called ScrollAwareFABBehavior.java that extends from FloatingActionButton.Behavior.
-        Currently, the default behavior is used for the Floating Action Button to make room for
-        the Snackbar as shown in this video. We want to extend this behavior to signal that
-        we wish to handle scroll events in the vertical direction:
-    To place the floating action button, we will use CoordinatorLayout.
-        A CoordinatorLayout helps facilitate interactions between views contained within it,
-        which will be useful later to describe how to animate the button depending on scroll changes.
-        For now we can take advantage of a feature in CoordinatorLayout that allows us to hover
-        one element over another. We simply need to have the ListView and FloatingActionButton
-        contained within the CoordinatorLayout and use the layout_anchor and
-        layout_anchorGravity attributes.
-    Next, you must implement a CoordinatorLayout Behavior for the Floating Action Button.
-        This class will be used to define how the button should respond to other views contained
-        within the same CoordinatorLayout.
-Create a file called ScrollAwareFABBehavior.java that extends from FloatingActionButton.Behavior.
-        Currently, the default behavior is used for the Floating Action Button to make room for
-        the Snackbar as shown in this video. We want to extend this behavior to signal that
-        we wish to handle scroll events in the vertical direction:</string>
 </resources>

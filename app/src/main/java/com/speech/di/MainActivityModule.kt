@@ -1,8 +1,8 @@
 package com.speech.di
 
 import androidx.fragment.app.Fragment
-import com.speech.ui.speech.ForeignSpeakerFragment
-import com.speech.ui.speech.NativeSpeakerFragment
+import com.speech.ui.conversation.ForeignSpeakerFragment
+import com.speech.ui.conversation.NativeSpeakerFragment
 import dagger.Module
 import dagger.Provides
 

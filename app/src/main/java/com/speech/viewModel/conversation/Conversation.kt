@@ -45,7 +45,7 @@ open class Conversation (private val context: Context) {
         }
     }
 
-    fun onDestroy() {
+    fun onStop() {
         textToSpeechService.shutdown()
     }
 

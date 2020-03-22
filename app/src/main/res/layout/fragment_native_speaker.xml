@@ -24,17 +24,15 @@
             android:id="@+id/parent_layout"
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            tools:context=".ui.speech.NativeSpeakerFragment">
+            tools:context=".ui.conversation.NativeSpeakerFragment">
 
             <ScrollView
                 android:id="@+id/translate_scroll"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
-                android:layout_marginStart="16dp"
-                android:layout_marginLeft="16dp"
-                android:layout_marginTop="16dp"
-                android:layout_marginEnd="24dp"
-                android:layout_marginRight="24dp"
+                android:layout_marginStart="8dp"
+                android:layout_marginTop="8dp"
+                android:layout_marginEnd="8dp"
                 android:layout_marginBottom="8dp"
                 app:layout_constraintBottom_toTopOf="@+id/start_speak_btn"
                 app:layout_constraintEnd_toEndOf="parent"
@@ -44,26 +42,20 @@
                 <FrameLayout
                     android:id="@+id/translate_layout"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content">
+                    android:layout_height="wrap_content"
+                    android:background="@{conversation.nativeTranslate.length() > 0 ? @drawable/rounded_rectangle : @drawable/transparent}">
 
                     <TextView
                         android:id="@+id/translated_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
                         android:paddingBottom="24dp"
+                        android:layout_marginTop="2dp"
+                        android:layout_marginStart="3dp"
+                        android:layout_marginEnd="3dp"
                         android:text="@{conversation.nativeTranslate}"
                         android:textColor="@color/white"
                         android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
-
-                    <View
-                        android:layout_width="match_parent"
-                        android:layout_height="1dp"
-                        android:layout_gravity="bottom"
-                        android:layout_marginStart="32dp"
-                        android:layout_marginEnd="32dp"
-                        android:layout_marginRight="32dp"
-                        android:background="@color/white"
-                        android:visibility="@{conversation.nativeTranslate.length() > 0 ? View.VISIBLE : View.GONE}" />
                 </FrameLayout>
             </ScrollView>
 

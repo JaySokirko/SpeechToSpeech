@@ -1,4 +1,4 @@
-package com.speech.ui.speech
+package com.speech.ui.conversation
 
 import android.os.Bundle
 import android.view.LayoutInflater
@@ -9,6 +9,7 @@ import androidx.lifecycle.Observer
 import com.speech.R
 import com.speech.databinding.FragmentForeignSpeakerBinding
 import com.speech.util.EventObserver
+import com.speech.util.InternetConnection
 import com.speech.util.REQUEST_SPEAK_FOREIGN
 
 class ForeignSpeakerFragment : SpeakerParentFragment() {
@@ -36,8 +37,13 @@ class ForeignSpeakerFragment : SpeakerParentFragment() {
 
         clickHandler.clicksObserver.observe(this, Observer { event ->
             if (event == EventObserver.Event.START_SPEAK_INTENT) {
-                startActivityForResult(getSpeechIntent("en", resources.getString(R.string.speech_intent_hint_en)),
-                    REQUEST_SPEAK_FOREIGN)
+                if (!InternetConnection.isInternetConnectionEnabled(context!!)){
+                    showInternetConnectionDialog()
+                } else {
+                    startActivityForResult(getSpeechIntent("en", resources.getString(R.string.speech_intent_hint_en)),
+                        REQUEST_SPEAK_FOREIGN
+                    )
+                }
             }
         })
     }

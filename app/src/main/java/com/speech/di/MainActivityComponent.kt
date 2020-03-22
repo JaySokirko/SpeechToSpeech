@@ -1,6 +1,6 @@
 package com.speech.di
 
-import com.speech.ui.speech.MainActivity
+import com.speech.ui.conversation.MainActivity
 import dagger.Component
 
 @Component(modules = [MainActivityModule::class])

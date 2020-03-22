@@ -32,7 +32,7 @@ class GoogleTranslator @Inject constructor(private val context: Context) {
         val policy = StrictMode.ThreadPolicy.Builder().permitAll().build()
         StrictMode.setThreadPolicy(policy)
         try {
-            context.resources.openRawResource(R.raw.credentials).use { credentialsFile ->
+            context.resources.openRawResource(R.raw.credentials_2).use { credentialsFile ->
                 val myCredentials = GoogleCredentials.fromStream(credentialsFile)
                 val translateOptions = TranslateOptions.newBuilder().setCredentials(myCredentials).build()
                 return translateOptions.service

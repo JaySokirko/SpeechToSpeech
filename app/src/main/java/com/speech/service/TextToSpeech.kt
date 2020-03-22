@@ -25,7 +25,6 @@ class TextToSpeech @Inject constructor(context: Context) {
     }
 
     fun shutdown(){
-        androidTextToSpeech.stop()
-        androidTextToSpeech.shutdown()
+        androidTextToSpeech.apply { stop(); shutdown() }
     }
 }
