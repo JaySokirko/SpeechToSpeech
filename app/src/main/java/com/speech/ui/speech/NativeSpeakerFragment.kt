@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import com.speech.R
 import com.speech.databinding.FragmentNativeSpeakerBinding
 import com.speech.util.EventObserver
-import com.speech.util.REQUEST_SPEECH_NATIVE
+import com.speech.util.REQUEST_SPEAK_NATIVE
 
 class NativeSpeakerFragment : SpeakerParentFragment() {
 
@@ -31,13 +31,13 @@ class NativeSpeakerFragment : SpeakerParentFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        binding.translation = translation
+        binding.conversation = conversation
         binding.clickHandler = clickHandler
 
         clickHandler.clicksObserver.observe(this, Observer { event ->
-            if (event == EventObserver.Event.START_SPEECH_INTENT) {
+            if (event == EventObserver.Event.START_SPEAK_INTENT) {
                 startActivityForResult(getSpeechIntent("ru", resources.getString(R.string.speech_intent_hint_ru)),
-                    REQUEST_SPEECH_NATIVE)
+                    REQUEST_SPEAK_NATIVE)
             }
         })
     }

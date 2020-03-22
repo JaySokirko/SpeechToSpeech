@@ -4,20 +4,20 @@ import android.content.Intent
 import android.os.Bundle
 import android.speech.RecognizerIntent
 import androidx.fragment.app.Fragment
-import com.speech.util.REQUEST_SPEECH_NATIVE
-import com.speech.util.REQUEST_SPEECH_FOREIGN
-import com.speech.viewModel.ClickHandler
-import com.speech.viewModel.Translation
+import com.speech.util.REQUEST_SPEAK_NATIVE
+import com.speech.util.REQUEST_SPEAK_FOREIGN
+import com.speech.viewModel.conversation.ClickHandler
+import com.speech.viewModel.conversation.Conversation
 
 abstract class SpeakerParentFragment : Fragment() {
 
-    protected lateinit var translation: Translation
+    protected lateinit var conversation: Conversation
     protected lateinit var clickHandler: ClickHandler
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        translation = Translation.getInstance(context!!)
-        clickHandler = ClickHandler()
+        conversation = Conversation.getInstance(context!!)!!
+        clickHandler = ClickHandler(context!!)
     }
 
     protected fun getSpeechIntent(language: String, hint: String): Intent {
@@ -34,13 +34,13 @@ abstract class SpeakerParentFragment : Fragment() {
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {
         super.onActivityResult(requestCode, resultCode, data)
         data ?: return
-        if (requestCode == REQUEST_SPEECH_NATIVE || requestCode == REQUEST_SPEECH_FOREIGN) {
-            translation.onActivityResult(requestCode, data)
+        if (requestCode == REQUEST_SPEAK_NATIVE || requestCode == REQUEST_SPEAK_FOREIGN) {
+            conversation.onActivityResult(requestCode, data)
         }
     }
 
     override fun onDestroy() {
         super.onDestroy()
-        translation.onDestroy()
+        conversation.onDestroy()
     }
 }

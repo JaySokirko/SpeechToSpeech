@@ -9,7 +9,7 @@ import androidx.lifecycle.Observer
 import com.speech.R
 import com.speech.databinding.FragmentForeignSpeakerBinding
 import com.speech.util.EventObserver
-import com.speech.util.REQUEST_SPEECH_FOREIGN
+import com.speech.util.REQUEST_SPEAK_FOREIGN
 
 class ForeignSpeakerFragment : SpeakerParentFragment() {
 
@@ -31,13 +31,13 @@ class ForeignSpeakerFragment : SpeakerParentFragment() {
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
-        binding.translation = translation
+        binding.conversation = conversation
         binding.clickHandler = clickHandler
 
         clickHandler.clicksObserver.observe(this, Observer { event ->
-            if (event == EventObserver.Event.START_SPEECH_INTENT) {
+            if (event == EventObserver.Event.START_SPEAK_INTENT) {
                 startActivityForResult(getSpeechIntent("en", resources.getString(R.string.speech_intent_hint_en)),
-                    REQUEST_SPEECH_FOREIGN)
+                    REQUEST_SPEAK_FOREIGN)
             }
         })
     }

@@ -36,10 +36,10 @@ class MainActivity : AppCompatActivity() {
         setupFragmentPagerAdapter()
 
         EventObserver.commonObserver.observe(this, Observer { event ->
-            if (event == EventObserver.Event.SPEECH_NATIVE_INTENT_FINISH) {
+            if (event == EventObserver.Event.SPEAK_NATIVE_INTENT_FINISH) {
                 view_pager.setCurrentItem(FOREIGN_SPEAKER_FRAGMENT, true)
             }
-            if (event == EventObserver.Event.SPEECH_FOREIGN_INTENT_FINISH) {
+            if (event == EventObserver.Event.SPEAK_FOREIGN_INTENT_FINISH) {
                 view_pager.setCurrentItem(NATIVE_SPEAKER_FRAGMENT, true)
             }
         })

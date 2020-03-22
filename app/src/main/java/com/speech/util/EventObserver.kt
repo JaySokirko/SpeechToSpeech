@@ -9,8 +9,8 @@ class EventObserver {
     }
 
     enum class Event {
-        START_SPEECH_INTENT,
-        SPEECH_NATIVE_INTENT_FINISH,
-        SPEECH_FOREIGN_INTENT_FINISH
+        START_SPEAK_INTENT,
+        SPEAK_NATIVE_INTENT_FINISH,
+        SPEAK_FOREIGN_INTENT_FINISH
     }
 }

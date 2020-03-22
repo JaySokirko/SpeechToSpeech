@@ -1,4 +1,4 @@
-package com.speech.util
+package com.speech.service
 
 import android.content.Context
 import android.speech.tts.TextToSpeech
@@ -19,8 +19,8 @@ class TextToSpeech @Inject constructor(context: Context) {
         )
     }
 
-    fun speak(locale: Locale, text: String){
-        androidTextToSpeech.language = locale
+    fun speak(language: String, text: String){
+        androidTextToSpeech.language = Locale(language)
         androidTextToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null)
     }
 

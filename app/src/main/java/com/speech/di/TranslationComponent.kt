@@ -1,7 +1,7 @@
 package com.speech.di
 
 import com.speech.service.GoogleTranslator
-import com.speech.util.TextToSpeech
+import com.speech.service.TextToSpeech
 import dagger.Component
 
 @Component(modules = [TranslationModule::class])
