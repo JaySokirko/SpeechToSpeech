@@ -40,7 +40,7 @@ class ForeignSpeakerFragment : SpeakerParentFragment() {
                 if (!InternetConnection.isInternetConnectionEnabled(context!!)){
                     showInternetConnectionDialog()
                 } else {
-                    startActivityForResult(getSpeechIntent("en", resources.getString(R.string.speech_intent_hint_en)),
+                    startActivityForResult(getSpeechIntent("en", getString(R.string.speech_intent_hint_en)),
                         REQUEST_SPEAK_FOREIGN
                     )
                 }

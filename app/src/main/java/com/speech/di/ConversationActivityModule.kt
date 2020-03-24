@@ -7,7 +7,7 @@ import dagger.Module
 import dagger.Provides
 
 @Module
-class MainActivityModule{
+class ConversationActivityModule{
 
     @Provides
     fun provideFragments(): List<Fragment>{

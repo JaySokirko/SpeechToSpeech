@@ -7,5 +7,6 @@
     <string name="no_internet">No internet connection</string>
     <string name="no_internet_hint">Please check your internet connection and try again.</string>
     <string name="settings">settings</string>
+    <string name="start_conversation_hint">Press the speech button to start a conversation</string>
 
 </resources>

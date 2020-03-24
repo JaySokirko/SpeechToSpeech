@@ -1,13 +1,23 @@
 package com.speech.ui.conversation
 
+import android.app.WallpaperColors
+import android.app.WallpaperManager
+import android.content.Context
+import android.content.pm.PackageManager
+import android.content.res.Configuration
 import android.graphics.drawable.AnimationDrawable
+import android.hardware.biometrics.BiometricManager
+import android.hardware.fingerprint.FingerprintManager
+import android.location.LocationManager
 import android.os.Bundle
+import android.os.Parcel
+import android.os.PowerManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
 import com.speech.R
-import com.speech.di.DaggerMainActivityComponent
-import com.speech.di.MainActivityModule
+import com.speech.di.ConversationActivityModule
+import com.speech.di.DaggerConversationActivityComponent
 import com.speech.ui.adapters.FragmentPagerAdapter
 import com.speech.util.EventObserver
 import com.speech.util.FOREIGN_SPEAKER_FRAGMENT
@@ -15,7 +25,7 @@ import com.speech.util.NATIVE_SPEAKER_FRAGMENT
 import kotlinx.android.synthetic.main.activity_main.*
 import javax.inject.Inject
 
-class MainActivity : AppCompatActivity() {
+class ConversationActivity : AppCompatActivity() {
 
     @Inject
     lateinit var fragmentList: List<@JvmSuppressWildcards Fragment>
@@ -26,9 +36,9 @@ class MainActivity : AppCompatActivity() {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
 
-        DaggerMainActivityComponent
+        DaggerConversationActivityComponent
             .builder()
-            .mainActivityModule(MainActivityModule())
+            .conversationActivityModule(ConversationActivityModule())
             .build()
             .inject(this)
 
@@ -43,6 +53,21 @@ class MainActivity : AppCompatActivity() {
                 view_pager.setCurrentItem(NATIVE_SPEAKER_FRAGMENT, true)
             }
         })
+
+//        val config: Configuration = resources.configuration
+//        config.colorMode
+
+//        val fingerprintManager = getSystemService(Context.FINGERPRINT_SERVICE) as FingerprintManager
+//        fingerprintManager.isHardwareDetected
+
+//        val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
+//        lm.isLocationEnabled
+
+//        val packageManager = packageManager
+//        packageManager.hasSystemFeature(PackageManager.FEATURE_ACTIVITIES_ON_SECONDARY_DISPLAYS)
+
+//        val a = WallpaperColors(Parcel.obtain())
+//        a.primaryColor
     }
 
     override fun onResume() {

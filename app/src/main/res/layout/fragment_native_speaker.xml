@@ -26,6 +26,24 @@
             android:layout_height="match_parent"
             tools:context=".ui.conversation.NativeSpeakerFragment">
 
+            <TextView
+                android:id="@+id/start_speak_hint"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:layout_marginStart="16dp"
+                android:layout_marginLeft="16dp"
+                android:layout_marginEnd="16dp"
+                android:layout_marginRight="16dp"
+                android:layout_marginBottom="32dp"
+                android:gravity="center"
+                android:text="@string/start_conversation_hint"
+                android:textAppearance="@style/TextAppearance.AppCompat.Menu"
+                android:textColor="@color/white"
+                android:visibility="@{conversation.translatedTextNullOrEmpty ? View.VISIBLE : View.GONE}"
+                app:layout_constraintBottom_toTopOf="@+id/start_speak_btn"
+                app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintStart_toStartOf="parent" />
+
             <ScrollView
                 android:id="@+id/translate_scroll"
                 android:layout_width="match_parent"

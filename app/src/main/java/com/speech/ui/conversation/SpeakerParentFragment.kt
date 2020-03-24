@@ -46,7 +46,7 @@ abstract class SpeakerParentFragment : Fragment() {
     }
 
     protected fun showInternetConnectionDialog(){
-        InternetConnectionDialog()
-            .show(fragmentManager!!, InternetConnectionDialog::class.java.canonicalName)
+        InternetConnectionDialog().show(fragmentManager!!,
+            InternetConnectionDialog::class.java.canonicalName)
     }
 }

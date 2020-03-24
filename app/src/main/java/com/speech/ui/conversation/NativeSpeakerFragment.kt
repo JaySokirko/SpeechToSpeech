@@ -40,9 +40,8 @@ class NativeSpeakerFragment : SpeakerParentFragment() {
                 if (!InternetConnection.isInternetConnectionEnabled(context!!)) {
                     showInternetConnectionDialog()
                 } else {
-                    startActivityForResult(getSpeechIntent("ru", resources.getString(R.string.speech_intent_hint_ru)),
-                        REQUEST_SPEAK_NATIVE
-                    )
+                    startActivityForResult(getSpeechIntent("ru", getString(R.string.speech_intent_hint_ru)),
+                        REQUEST_SPEAK_NATIVE)
                 }
             }
         })
