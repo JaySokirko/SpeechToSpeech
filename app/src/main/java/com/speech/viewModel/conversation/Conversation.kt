@@ -3,13 +3,11 @@ package com.speech.viewModel.conversation
 import android.content.Context
 import android.content.Intent
 import android.speech.RecognizerIntent
-import androidx.databinding.Observable
-import com.speech.R
 import com.speech.util.EventObserver
 import com.speech.util.REQUEST_SPEAK_FOREIGN
 import com.speech.util.REQUEST_SPEAK_NATIVE
 
-open class Conversation(context: Context): ConversationParent(context) {
+open class Conversation(context: Context): ConversationBase(context) {
 
     fun onActivityResult(requestCode: Int, data: Intent) {
         if (requestCode == REQUEST_SPEAK_NATIVE || requestCode == REQUEST_SPEAK_FOREIGN) {
@@ -23,7 +21,7 @@ open class Conversation(context: Context): ConversationParent(context) {
             if (requestCode == REQUEST_SPEAK_NATIVE) {
                 EventObserver.commonObserver.postValue(EventObserver.Event.SPEAK_NATIVE_INTENT_FINISH)
 
-                foreignTranslate.set(googleTranslator.getTranslatedText(result[0],
+                foreignTranslate.set(translator.getTranslatedText(result[0],
                     foreignLanguage.get().toString()))
 
                 textToSpeechService.speak(foreignLanguage.get().toString(),
@@ -33,7 +31,7 @@ open class Conversation(context: Context): ConversationParent(context) {
             if (requestCode == REQUEST_SPEAK_FOREIGN) {
                 EventObserver.commonObserver.postValue(EventObserver.Event.SPEAK_FOREIGN_INTENT_FINISH)
 
-                nativeTranslate.set(googleTranslator.getTranslatedText(result[0],
+                nativeTranslate.set(translator.getTranslatedText(result[0],
                     nativeLanguage.get().toString()))
 
                 textToSpeechService.speak(nativeLanguage.get().toString(),

@@ -7,18 +7,18 @@ import androidx.fragment.app.Fragment
 import com.speech.ui.dialog.InternetConnectionDialog
 import com.speech.util.REQUEST_SPEAK_NATIVE
 import com.speech.util.REQUEST_SPEAK_FOREIGN
-import com.speech.viewModel.conversation.ClickHandler
+import com.speech.viewModel.conversation.ConversationClickHandler
 import com.speech.viewModel.conversation.Conversation
 
-abstract class SpeakerParentFragment : Fragment() {
+abstract class SpeakerBaseFragment : Fragment() {
 
     protected lateinit var conversation: Conversation
-    protected lateinit var clickHandler: ClickHandler
+    protected lateinit var conversationClickHandler: ConversationClickHandler
 
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         conversation = Conversation.getInstance(context!!)!!
-        clickHandler = ClickHandler(context!!)
+        conversationClickHandler = ConversationClickHandler(context!!)
     }
 
     override fun onActivityResult(requestCode: Int, resultCode: Int, data: Intent?) {

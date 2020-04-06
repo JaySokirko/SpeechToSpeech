@@ -11,6 +11,8 @@ class EventObserver {
     enum class Event {
         START_SPEAK_INTENT,
         SPEAK_NATIVE_INTENT_FINISH,
-        SPEAK_FOREIGN_INTENT_FINISH
+        SPEAK_FOREIGN_INTENT_FINISH,
+        RUSSIAN_LANGUAGE_SET,
+        ENGLISH_LANGUAGE_SET
     }
 }

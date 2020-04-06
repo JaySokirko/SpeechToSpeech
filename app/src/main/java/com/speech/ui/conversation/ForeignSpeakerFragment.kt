@@ -12,7 +12,7 @@ import com.speech.util.EventObserver
 import com.speech.util.InternetConnection
 import com.speech.util.REQUEST_SPEAK_FOREIGN
 
-class ForeignSpeakerFragment : SpeakerParentFragment() {
+class ForeignSpeakerFragment : SpeakerBaseFragment() {
 
     private lateinit var binding: FragmentForeignSpeakerBinding
 
@@ -33,9 +33,9 @@ class ForeignSpeakerFragment : SpeakerParentFragment() {
     override fun onActivityCreated(savedInstanceState: Bundle?) {
         super.onActivityCreated(savedInstanceState)
         binding.conversation = conversation
-        binding.clickHandler = clickHandler
+        binding.clickHandler = conversationClickHandler
 
-        clickHandler.clicksObserver.observe(this, Observer { event ->
+        conversationClickHandler.clicksObserver.observe(this, Observer { event ->
             if (event == EventObserver.Event.START_SPEAK_INTENT) {
                 if (!InternetConnection.isInternetConnectionEnabled(context!!)){
                     showInternetConnectionDialog()

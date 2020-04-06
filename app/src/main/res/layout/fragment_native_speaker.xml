@@ -13,12 +13,13 @@
 
         <variable
             name="clickHandler"
-            type="com.speech.viewModel.conversation.ClickHandler" />
+            type="com.speech.viewModel.conversation.ConversationClickHandler" />
     </data>
 
     <androidx.coordinatorlayout.widget.CoordinatorLayout
         android:layout_width="match_parent"
-        android:layout_height="match_parent">
+        android:layout_height="match_parent"
+        android:background="@color/deep_purple_500">
 
         <androidx.constraintlayout.widget.ConstraintLayout
             android:id="@+id/parent_layout"
@@ -44,38 +45,38 @@
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent" />
 
-            <ScrollView
-                android:id="@+id/translate_scroll"
+            <FrameLayout
+                android:id="@+id/translate_layout"
                 android:layout_width="match_parent"
                 android:layout_height="0dp"
                 android:layout_marginStart="8dp"
                 android:layout_marginTop="8dp"
                 android:layout_marginEnd="8dp"
-                android:layout_marginBottom="8dp"
+                android:layout_marginBottom="28dp"
+                android:background="@{conversation.nativeTranslate.length() > 0 ? @drawable/rounded_rectangle : @drawable/transparent}"
                 app:layout_constraintBottom_toTopOf="@+id/start_speak_btn"
                 app:layout_constraintEnd_toEndOf="parent"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintTop_toTopOf="parent">
 
-                <FrameLayout
-                    android:id="@+id/translate_layout"
+                <ScrollView
+                    android:id="@+id/translate_scroll"
                     android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:background="@{conversation.nativeTranslate.length() > 0 ? @drawable/rounded_rectangle : @drawable/transparent}">
+                    android:layout_height="match_parent">
 
                     <TextView
                         android:id="@+id/translated_text"
                         android:layout_width="wrap_content"
                         android:layout_height="wrap_content"
-                        android:paddingBottom="24dp"
-                        android:layout_marginTop="2dp"
                         android:layout_marginStart="3dp"
+                        android:layout_marginTop="2dp"
                         android:layout_marginEnd="3dp"
+                        android:paddingBottom="24dp"
                         android:text="@{conversation.nativeTranslate}"
-                        android:textColor="@color/white"
-                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"/>
-                </FrameLayout>
-            </ScrollView>
+                        android:textAppearance="@style/TextAppearance.AppCompat.Headline"
+                        android:textColor="@color/white" />
+                </ScrollView>
+            </FrameLayout>
 
             <com.google.android.material.floatingactionbutton.FloatingActionButton
                 android:id="@+id/start_speak_btn"
@@ -85,9 +86,68 @@
                 android:layout_marginRight="24dp"
                 android:layout_marginBottom="24dp"
                 android:onClick="@{() -> clickHandler.startSpeak()}"
-                android:src="@drawable/ic_mic_normal"
                 app:layout_constraintBottom_toBottomOf="parent"
-                app:layout_constraintEnd_toEndOf="parent" />
+                app:layout_constraintEnd_toEndOf="parent"
+                app:srcCompat="@drawable/ic_mic_normal" />
+
+            <androidx.constraintlayout.motion.widget.MotionLayout
+                android:id="@+id/motion_layout"
+                android:layout_width="0dp"
+                android:layout_height="0dp"
+                app:layoutDescription="@xml/scene_01"
+                app:layout_constraintBottom_toBottomOf="parent"
+                app:layout_constraintEnd_toStartOf="@+id/start_speak_btn"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintTop_toBottomOf="@+id/translate_layout">
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/russian_lang_btn"
+                    android:layout_width="56dp"
+                    android:layout_height="56dp"
+                    android:onClick="@{() -> clickHandler.setRussianLanguage()}"
+                    app:layout_constraintBottom_toBottomOf="parent"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:srcCompat="@drawable/ic_russia"
+                    />
+
+                <androidx.constraintlayout.utils.widget.ImageFilterView
+                    android:id="@+id/english_lang_btn"
+                    android:layout_width="40dp"
+                    android:layout_height="40dp"
+                    android:onClick="@{() -> clickHandler.setEnglishLanguage()}"
+                    app:layout_constraintBottom_toBottomOf="@+id/russian_lang_btn"
+                    app:layout_constraintStart_toEndOf="@+id/russian_lang_btn"
+                    app:srcCompat="@drawable/ic_uk" />
+
+            </androidx.constraintlayout.motion.widget.MotionLayout>
+
+<!--            <androidx.appcompat.widget.AppCompatImageView-->
+<!--                android:id="@+id/russian_lang_btn"-->
+<!--                android:layout_width="56dp"-->
+<!--                android:layout_height="56dp"-->
+<!--                android:layout_marginStart="24dp"-->
+<!--                android:layout_marginLeft="24dp"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                android:onClick="@{() -> clickHandler.setRussianLanguage()}"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/start_speak_btn"-->
+<!--                app:layout_constraintStart_toStartOf="parent"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/start_speak_btn"-->
+<!--                app:srcCompat="@drawable/ic_russia" />-->
+
+<!--            <androidx.appcompat.widget.AppCompatImageView-->
+<!--                android:id="@+id/english_lang_btn"-->
+<!--                android:layout_width="40dp"-->
+<!--                android:layout_height="40dp"-->
+<!--                android:layout_marginStart="32dp"-->
+<!--                android:layout_marginLeft="32dp"-->
+<!--                android:clickable="true"-->
+<!--                android:focusable="true"-->
+<!--                android:onClick="@{() -> clickHandler.setEnglishLanguage()}"-->
+<!--                app:layout_constraintBottom_toBottomOf="@+id/russian_lang_btn"-->
+<!--                app:layout_constraintStart_toEndOf="@+id/russian_lang_btn"-->
+<!--                app:layout_constraintTop_toTopOf="@+id/russian_lang_btn"-->
+<!--                app:srcCompat="@drawable/ic_uk" />-->
 
         </androidx.constraintlayout.widget.ConstraintLayout>
 
@@ -96,11 +156,11 @@
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
             android:onClick="@{() -> clickHandler.textToSpeech(conversation.nativeTranslate, @string/ru)}"
-            android:src="@drawable/ic_speaker_normal"
             android:visibility="@{conversation.nativeTranslate.length() > 0 ? View.VISIBLE : View.GONE}"
             app:fabSize="mini"
             app:layout_anchor="@id/translate_layout"
-            app:layout_anchorGravity="bottom|center" />
+            app:layout_anchorGravity="bottom|center"
+            app:srcCompat="@drawable/ic_speaker_normal" />
 
     </androidx.coordinatorlayout.widget.CoordinatorLayout>
 </layout>

@@ -7,10 +7,10 @@ import com.speech.R
 import com.speech.di.DaggerTranslationComponent
 import com.speech.di.TranslationComponent
 import com.speech.di.TranslationModule
-import com.speech.service.GoogleTranslator
 import com.speech.service.TextToSpeech
+import com.speech.service.GoogleTranslator
 
-open class ConversationParent(context: Context) {
+open class ConversationBase(context: Context) {
 
     var nativeTranslate: ObservableField<String> = ObservableField()
     var foreignTranslate: ObservableField<String> = ObservableField()
@@ -30,6 +30,6 @@ open class ConversationParent(context: Context) {
         .build()
 
     protected val textToSpeechService: TextToSpeech = dagger.getTextToSpeech()
-    protected val googleTranslator: GoogleTranslator = dagger.getGoogleTranslator()
+    protected val translator: GoogleTranslator = dagger.getGoogleTranslator()
 
 }

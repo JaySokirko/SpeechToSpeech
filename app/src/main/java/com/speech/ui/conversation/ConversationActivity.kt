@@ -53,21 +53,6 @@ class ConversationActivity : AppCompatActivity() {
                 view_pager.setCurrentItem(NATIVE_SPEAKER_FRAGMENT, true)
             }
         })
-
-//        val config: Configuration = resources.configuration
-//        config.colorMode
-
-//        val fingerprintManager = getSystemService(Context.FINGERPRINT_SERVICE) as FingerprintManager
-//        fingerprintManager.isHardwareDetected
-
-//        val lm = getSystemService(Context.LOCATION_SERVICE) as LocationManager
-//        lm.isLocationEnabled
-
-//        val packageManager = packageManager
-//        packageManager.hasSystemFeature(PackageManager.FEATURE_ACTIVITIES_ON_SECONDARY_DISPLAYS)
-
-//        val a = WallpaperColors(Parcel.obtain())
-//        a.primaryColor
     }
 
     override fun onResume() {
