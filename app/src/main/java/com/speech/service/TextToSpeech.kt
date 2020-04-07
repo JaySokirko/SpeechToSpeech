@@ -10,13 +10,11 @@ class TextToSpeech @Inject constructor(context: Context) {
     private lateinit var androidTextToSpeech: TextToSpeech
 
     init {
-        androidTextToSpeech = TextToSpeech(context,
-            TextToSpeech.OnInitListener { status ->
+        androidTextToSpeech = TextToSpeech(context, TextToSpeech.OnInitListener { status ->
                 if (status != TextToSpeech.ERROR) {
                     androidTextToSpeech.language = Locale.UK;
                 }
-            }
-        )
+            })
     }
 
     fun speak(language: String, text: String){

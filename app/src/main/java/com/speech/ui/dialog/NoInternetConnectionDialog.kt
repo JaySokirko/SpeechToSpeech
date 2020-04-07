@@ -10,7 +10,7 @@ import androidx.fragment.app.DialogFragment
 import com.speech.R
 
 
-class InternetConnectionDialog : DialogFragment(), DialogInterface.OnClickListener  {
+class NoInternetConnectionDialog : DialogFragment(), DialogInterface.OnClickListener  {
 
     override fun onCreateDialog(savedInstanceState: Bundle?): Dialog {
         val adb: AlertDialog.Builder = AlertDialog.Builder(context!!)

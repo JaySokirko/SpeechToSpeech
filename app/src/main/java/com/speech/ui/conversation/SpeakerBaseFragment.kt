@@ -2,9 +2,10 @@ package com.speech.ui.conversation
 
 import android.content.Intent
 import android.os.Bundle
+import android.os.Handler
 import android.speech.RecognizerIntent
 import androidx.fragment.app.Fragment
-import com.speech.ui.dialog.InternetConnectionDialog
+import com.speech.ui.dialog.NoInternetConnectionDialog
 import com.speech.util.REQUEST_SPEAK_NATIVE
 import com.speech.util.REQUEST_SPEAK_FOREIGN
 import com.speech.viewModel.conversation.ConversationClickHandler
@@ -12,6 +13,7 @@ import com.speech.viewModel.conversation.Conversation
 
 abstract class SpeakerBaseFragment : Fragment() {
 
+    protected val handler = Handler()
     protected lateinit var conversation: Conversation
     protected lateinit var conversationClickHandler: ConversationClickHandler
 
@@ -29,9 +31,9 @@ abstract class SpeakerBaseFragment : Fragment() {
         }
     }
 
-    override fun onStop() {
-        super.onStop()
-        conversation.onStop()
+    override fun onDestroyView() {
+        super.onDestroyView()
+        conversation.onDestroy()
     }
 
     protected fun getSpeechIntent(language: String, hint: String): Intent {
@@ -45,8 +47,10 @@ abstract class SpeakerBaseFragment : Fragment() {
         return intent
     }
 
-    protected fun showInternetConnectionDialog(){
-        InternetConnectionDialog().show(fragmentManager!!,
-            InternetConnectionDialog::class.java.canonicalName)
+    protected fun showNoInternetConnectionDialog() {
+        NoInternetConnectionDialog().show(
+            fragmentManager!!,
+            NoInternetConnectionDialog::class.java.canonicalName
+        )
     }
 }

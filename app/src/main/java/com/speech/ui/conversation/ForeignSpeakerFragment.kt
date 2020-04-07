@@ -11,6 +11,7 @@ import com.speech.databinding.FragmentForeignSpeakerBinding
 import com.speech.util.EventObserver
 import com.speech.util.InternetConnection
 import com.speech.util.REQUEST_SPEAK_FOREIGN
+import com.speech.viewModel.conversation.Conversation
 
 class ForeignSpeakerFragment : SpeakerBaseFragment() {
 
@@ -38,11 +39,10 @@ class ForeignSpeakerFragment : SpeakerBaseFragment() {
         conversationClickHandler.clicksObserver.observe(this, Observer { event ->
             if (event == EventObserver.Event.START_SPEAK_INTENT) {
                 if (!InternetConnection.isInternetConnectionEnabled(context!!)){
-                    showInternetConnectionDialog()
+                    showNoInternetConnectionDialog()
                 } else {
-                    startActivityForResult(getSpeechIntent("en", getString(R.string.speech_intent_hint_en)),
-                        REQUEST_SPEAK_FOREIGN
-                    )
+                    startActivityForResult(getSpeechIntent(Conversation.foreignLanguage.get().toString(),
+                        Conversation.foreignLanguageHint), REQUEST_SPEAK_FOREIGN)
                 }
             }
         })

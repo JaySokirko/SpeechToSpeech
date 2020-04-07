@@ -1,28 +1,14 @@
 package com.speech.viewModel.conversation
 
 import android.content.Context
-import androidx.databinding.ObservableBoolean
-import androidx.databinding.ObservableField
-import com.speech.R
 import com.speech.di.DaggerTranslationComponent
 import com.speech.di.TranslationComponent
 import com.speech.di.TranslationModule
-import com.speech.service.TextToSpeech
 import com.speech.service.GoogleTranslator
+import com.speech.service.TextToSpeech
+import com.speech.viewModel.Bindable
 
-open class ConversationBase(context: Context) {
-
-    var nativeTranslate: ObservableField<String> = ObservableField()
-    var foreignTranslate: ObservableField<String> = ObservableField()
-    var translatedTextNullOrEmpty: ObservableBoolean = ObservableBoolean()
-    val nativeLanguage: ObservableField<String> = ObservableField()
-    val foreignLanguage: ObservableField<String> = ObservableField()
-
-    init {
-        translatedTextNullOrEmpty.set(true)
-        nativeLanguage.set(context.getString(R.string.ru))
-        foreignLanguage.set(context.getString(R.string.en))
-    }
+open class ConversationBase(context: Context): Bindable {
 
     protected val dagger: TranslationComponent = DaggerTranslationComponent
         .builder()
@@ -32,4 +18,7 @@ open class ConversationBase(context: Context) {
     protected val textToSpeechService: TextToSpeech = dagger.getTextToSpeech()
     protected val translator: GoogleTranslator = dagger.getGoogleTranslator()
 
+    override fun onDestroy() {
+        textToSpeechService.shutdown()
+    }
 }
