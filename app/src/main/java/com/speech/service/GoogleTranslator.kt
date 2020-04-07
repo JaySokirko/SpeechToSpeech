@@ -37,8 +37,8 @@ class GoogleTranslator @Inject constructor(private val context: Context) {
                 val translateOptions = TranslateOptions.newBuilder().setCredentials(myCredentials).build()
                 return translateOptions.service
             }
-        } catch (e: Exception){
-            e.stackTrace
+        } catch (e: Exception) {
+            Logger.log(e)
             translateServiceError = e.message.toString()
         }
         return null

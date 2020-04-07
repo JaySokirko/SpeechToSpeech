@@ -1,5 +1,6 @@
 package com.speech.ui.conversation
 
+import android.content.ActivityNotFoundException
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.speech.R
 import com.speech.databinding.FragmentForeignSpeakerBinding
+import com.speech.service.Logger
 import com.speech.util.EventObserver
 import com.speech.util.InternetConnection
 import com.speech.util.REQUEST_SPEAK_FOREIGN
@@ -41,8 +43,12 @@ class ForeignSpeakerFragment : SpeakerBaseFragment() {
                 if (!InternetConnection.isInternetConnectionEnabled(context!!)){
                     showNoInternetConnectionDialog()
                 } else {
-                    startActivityForResult(getSpeechIntent(Conversation.foreignLanguage.get().toString(),
-                        Conversation.foreignLanguageHint), REQUEST_SPEAK_FOREIGN)
+                    try {
+                        startActivityForResult(getSpeechIntent(Conversation.foreignLanguage.get().toString(),
+                            Conversation.foreignLanguageHint), REQUEST_SPEAK_FOREIGN)
+                    } catch (exception: ActivityNotFoundException){
+                        Logger.log(exception)
+                    }
                 }
             }
         })

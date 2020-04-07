@@ -10,19 +10,27 @@ class TextToSpeech @Inject constructor(context: Context) {
     private lateinit var androidTextToSpeech: TextToSpeech
 
     init {
-        androidTextToSpeech = TextToSpeech(context, TextToSpeech.OnInitListener { status ->
+        try {
+            androidTextToSpeech = TextToSpeech(context, TextToSpeech.OnInitListener { status ->
                 if (status != TextToSpeech.ERROR) {
                     androidTextToSpeech.language = Locale.UK;
                 }
             })
+        } catch (exception: Exception) {
+            Logger.log(exception)
+        }
     }
 
-    fun speak(language: String, text: String){
+    fun speak(language: String, text: String) {
         androidTextToSpeech.language = Locale(language)
-        androidTextToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null)
+        try {
+            androidTextToSpeech.speak(text, TextToSpeech.QUEUE_FLUSH, null, null)
+        } catch (exception: java.lang.Exception) {
+            Logger.log(exception)
+        }
     }
 
-    fun shutdown(){
+    fun shutdown() {
         androidTextToSpeech.apply { stop(); shutdown() }
     }
 }

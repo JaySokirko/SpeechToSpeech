@@ -17,6 +17,8 @@ open class Conversation(context: Context): ConversationBase(context) {
     var translatedTextNullOrEmpty: ObservableBoolean = ObservableBoolean()
 
     init {
+//        nativeTranslate.set("привет, как дела?")
+//        foreignTranslate.set("hello world")
         translatedTextNullOrEmpty.set(true)
         nativeLanguage.set(context.getString(R.string.ru))
         foreignLanguage.set(context.getString(R.string.en))

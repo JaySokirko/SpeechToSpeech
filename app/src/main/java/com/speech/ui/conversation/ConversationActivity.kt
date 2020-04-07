@@ -1,24 +1,15 @@
 package com.speech.ui.conversation
 
-import android.app.WallpaperColors
-import android.app.WallpaperManager
-import android.content.Context
-import android.content.pm.PackageManager
-import android.content.res.Configuration
 import android.graphics.drawable.AnimationDrawable
-import android.hardware.biometrics.BiometricManager
-import android.hardware.fingerprint.FingerprintManager
-import android.location.LocationManager
 import android.os.Bundle
-import android.os.Parcel
-import android.os.PowerManager
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
+import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.speech.R
 import com.speech.di.ConversationActivityModule
 import com.speech.di.DaggerConversationActivityComponent
-import com.speech.ui.adapters.FragmentPagerAdapter
+import com.speech.ui.adapter.FragmentPagerAdapter
 import com.speech.util.EventObserver
 import com.speech.util.FOREIGN_SPEAKER_FRAGMENT
 import com.speech.util.NATIVE_SPEAKER_FRAGMENT
@@ -71,7 +62,7 @@ class ConversationActivity : AppCompatActivity() {
     }
 
     private fun setupAnimatedBackground() {
-        backgroundAnimation = parent_layout.background as AnimationDrawable
+        backgroundAnimation = conversation_activity_parent.background as AnimationDrawable
         backgroundAnimation.setEnterFadeDuration(5000);
         backgroundAnimation.setExitFadeDuration(2000);
     }

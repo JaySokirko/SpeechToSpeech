@@ -1,5 +1,6 @@
 package com.speech.ui.conversation
 
+import android.content.ActivityNotFoundException
 import android.os.Bundle
 import android.view.LayoutInflater
 import android.view.View
@@ -8,6 +9,7 @@ import androidx.databinding.DataBindingUtil
 import androidx.lifecycle.Observer
 import com.speech.R
 import com.speech.databinding.FragmentNativeSpeakerBinding
+import com.speech.service.Logger
 import com.speech.util.EventObserver
 import com.speech.util.InternetConnection
 import com.speech.util.REQUEST_SPEAK_NATIVE
@@ -45,8 +47,12 @@ class NativeSpeakerFragment : SpeakerBaseFragment() {
                 if (!InternetConnection.isInternetConnectionEnabled(context!!)) {
                     showNoInternetConnectionDialog()
                 } else {
-                    startActivityForResult(getSpeechIntent(Conversation.nativeLanguage.get().toString(),
-                           Conversation.nativeLanguageHint), REQUEST_SPEAK_NATIVE)
+                    try {
+                        startActivityForResult(getSpeechIntent(Conversation.nativeLanguage.get().toString(),
+                            Conversation.nativeLanguageHint), REQUEST_SPEAK_NATIVE)
+                    } catch (exception: ActivityNotFoundException){
+                        Logger.log(exception)
+                    }
                 }
             }
             else if (event == EventObserver.Event.ENGLISH_LANGUAGE_SELECTED) {
@@ -54,7 +60,6 @@ class NativeSpeakerFragment : SpeakerBaseFragment() {
                 translate_motion_layout.transitionToEnd()
                 disableSpeechBtn()
             }
-
             else if (event == EventObserver.Event.RUSSIAN_LANGUAGE_SELECTED) {
                 language_buttons_motion_layout.transitionToStart()
                 translate_motion_layout.transitionToEnd()
