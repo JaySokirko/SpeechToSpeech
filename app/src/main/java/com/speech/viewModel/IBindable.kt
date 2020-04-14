@@ -1,6 +1,6 @@
 package com.speech.viewModel
 
-interface Bindable {
+interface IBindable {
 
     fun onDestroy()
 }

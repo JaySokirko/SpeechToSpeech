@@ -38,10 +38,7 @@ abstract class SpeakerBaseFragment : Fragment() {
 
     protected fun getSpeechIntent(language: String, hint: String): Intent {
         val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        intent.putExtra(
-            RecognizerIntent.EXTRA_LANGUAGE_MODEL,
-            RecognizerIntent.LANGUAGE_MODEL_FREE_FORM
-        )
+        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
         intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, language)
         intent.putExtra(RecognizerIntent.EXTRA_PROMPT, hint)
         return intent

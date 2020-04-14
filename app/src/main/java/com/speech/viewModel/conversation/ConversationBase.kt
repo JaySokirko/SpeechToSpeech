@@ -4,11 +4,11 @@ import android.content.Context
 import com.speech.di.DaggerTranslationComponent
 import com.speech.di.TranslationComponent
 import com.speech.di.TranslationModule
-import com.speech.service.GoogleTranslator
 import com.speech.service.TextToSpeech
-import com.speech.viewModel.Bindable
+import com.speech.service.translation.ITranslator
+import com.speech.viewModel.IBindable
 
-open class ConversationBase(context: Context): Bindable {
+open class ConversationBase(context: Context): IBindable {
 
     protected val dagger: TranslationComponent = DaggerTranslationComponent
         .builder()
@@ -16,7 +16,7 @@ open class ConversationBase(context: Context): Bindable {
         .build()
 
     protected val textToSpeechService: TextToSpeech = dagger.getTextToSpeech()
-    protected val translator: GoogleTranslator = dagger.getGoogleTranslator()
+    protected val translator: ITranslator = dagger.getGoogleTranslator()
 
     override fun onDestroy() {
         textToSpeechService.shutdown()

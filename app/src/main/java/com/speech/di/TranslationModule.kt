@@ -1,7 +1,7 @@
 package com.speech.di
 
 import android.content.Context
-import com.speech.service.GoogleTranslator
+import com.speech.service.translation.GoogleTranslator
 import com.speech.service.TextToSpeech
 import dagger.Module
 import dagger.Provides
