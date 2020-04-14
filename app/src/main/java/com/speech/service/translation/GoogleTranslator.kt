@@ -1,4 +1,4 @@
-package com.speech.service
+package com.speech.service.translation
 
 import android.content.Context
 import android.os.StrictMode
@@ -6,9 +6,10 @@ import com.google.auth.oauth2.GoogleCredentials
 import com.google.cloud.translate.Translate
 import com.google.cloud.translate.TranslateOptions
 import com.speech.R
+import com.speech.service.Logger
 import javax.inject.Inject
 
-class GoogleTranslator @Inject constructor(private val context: Context) {
+class GoogleTranslator @Inject constructor(private val context: Context) : ITranslator {
 
     private var translate: Translate?
     private var translateServiceError: String = "translate service error"
@@ -17,12 +18,12 @@ class GoogleTranslator @Inject constructor(private val context: Context) {
         translate = getTranslateService()
     }
 
-    fun getTranslatedText(origText: String, toLanguage: String): String {
+    override fun getTranslatedText(text: String, targetLanguage: String): String {
         translate ?: return translateServiceError
 
         val translation = translate!!.translate(
-            origText,
-            Translate.TranslateOption.targetLanguage(toLanguage),
+            text,
+            Translate.TranslateOption.targetLanguage(targetLanguage),
             Translate.TranslateOption.model("base")
         )
         return translation.translatedText

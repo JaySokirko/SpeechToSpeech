@@ -5,7 +5,6 @@ import android.os.Bundle
 import androidx.appcompat.app.AppCompatActivity
 import androidx.fragment.app.Fragment
 import androidx.lifecycle.Observer
-import com.google.firebase.crashlytics.FirebaseCrashlytics
 import com.speech.R
 import com.speech.di.ConversationActivityModule
 import com.speech.di.DaggerConversationActivityComponent
@@ -21,7 +20,6 @@ class ConversationActivity : AppCompatActivity() {
     @Inject
     lateinit var fragmentList: List<@JvmSuppressWildcards Fragment>
     private lateinit var backgroundAnimation: AnimationDrawable
-    private val TAG = "TAG"
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
