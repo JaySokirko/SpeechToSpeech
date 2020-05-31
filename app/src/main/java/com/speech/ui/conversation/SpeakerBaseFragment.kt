@@ -4,10 +4,12 @@ import android.content.Intent
 import android.os.Bundle
 import android.os.Handler
 import android.speech.RecognizerIntent
+import android.util.Log
 import androidx.fragment.app.Fragment
 import com.speech.ui.dialog.NoInternetConnectionDialog
 import com.speech.util.REQUEST_SPEAK_NATIVE
 import com.speech.util.REQUEST_SPEAK_FOREIGN
+import com.speech.util.TAG
 import com.speech.viewModel.conversation.ConversationClickHandler
 import com.speech.viewModel.conversation.Conversation
 
@@ -37,11 +39,11 @@ abstract class SpeakerBaseFragment : Fragment() {
     }
 
     protected fun getSpeechIntent(language: String, hint: String): Intent {
-        val intent = Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH)
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
-        intent.putExtra(RecognizerIntent.EXTRA_LANGUAGE, language)
-        intent.putExtra(RecognizerIntent.EXTRA_PROMPT, hint)
-        return intent
+        return Intent(RecognizerIntent.ACTION_RECOGNIZE_SPEECH).apply {
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE_MODEL, RecognizerIntent.LANGUAGE_MODEL_FREE_FORM)
+            putExtra(RecognizerIntent.EXTRA_LANGUAGE, language)
+            putExtra(RecognizerIntent.EXTRA_PROMPT, hint)
+        }
     }
 
     protected fun showNoInternetConnectionDialog() {

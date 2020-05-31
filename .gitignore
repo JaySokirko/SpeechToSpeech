@@ -18,3 +18,6 @@ replay_pid10368.log
 app/src/main/res/raw/credentials.json
 app/src/main/res/raw/credentials_2.json
 app/google-services.json
+app/release/output.json
+app/release/app-release.apk
+keys
